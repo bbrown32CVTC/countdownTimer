@@ -30,28 +30,32 @@
         {
             components = new System.ComponentModel.Container();
             countdownTimer = new System.Windows.Forms.Timer(components);
-            hourLabel = new Label();
+            hoursLabel = new Label();
             minutesLabel = new Label();
             secondsLabel = new Label();
-            hourDropdownList = new ComboBox();
-            minutesDropDown = new ComboBox();
-            secondsDropDown = new ComboBox();
-            setBtn = new Button();
+            hoursDropdownList = new ComboBox();
+            minutesDropDownList = new ComboBox();
+            secondsDropDownList = new ComboBox();
             countdownDisplay = new Label();
             startBtn = new Button();
             stopBtn = new Button();
             resetBtn = new Button();
             SuspendLayout();
             // 
-            // hourLabel
+            // countdownTimer
             // 
-            hourLabel.AutoSize = true;
-            hourLabel.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            hourLabel.Location = new Point(39, 46);
-            hourLabel.Name = "hourLabel";
-            hourLabel.Size = new Size(65, 23);
-            hourLabel.TabIndex = 0;
-            hourLabel.Text = "Hour:";
+            countdownTimer.Interval = 1000;
+            countdownTimer.Tick += countdownTimer_Tick;
+            // 
+            // hoursLabel
+            // 
+            hoursLabel.AutoSize = true;
+            hoursLabel.Font = new Font("Verdana", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            hoursLabel.Location = new Point(39, 46);
+            hoursLabel.Name = "hoursLabel";
+            hoursLabel.Size = new Size(75, 23);
+            hoursLabel.TabIndex = 0;
+            hoursLabel.Text = "Hours:";
             // 
             // minutesLabel
             // 
@@ -73,107 +77,101 @@
             secondsLabel.TabIndex = 2;
             secondsLabel.Text = "Seconds:";
             // 
-            // hourDropdownList
+            // hoursDropdownList
             // 
-            hourDropdownList.DropDownStyle = ComboBoxStyle.DropDownList;
-            hourDropdownList.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            hourDropdownList.FormattingEnabled = true;
-            hourDropdownList.Location = new Point(12, 85);
-            hourDropdownList.Name = "hourDropdownList";
-            hourDropdownList.Size = new Size(121, 26);
-            hourDropdownList.TabIndex = 3;
+            hoursDropdownList.DropDownStyle = ComboBoxStyle.DropDownList;
+            hoursDropdownList.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            hoursDropdownList.FormattingEnabled = true;
+            hoursDropdownList.Location = new Point(12, 85);
+            hoursDropdownList.Name = "hoursDropdownList";
+            hoursDropdownList.Size = new Size(121, 26);
+            hoursDropdownList.TabIndex = 3;
+            hoursDropdownList.SelectedIndexChanged += hoursDropdownList_SelectedIndexChanged;
             // 
-            // minutesDropDown
+            // minutesDropDownList
             // 
-            minutesDropDown.DropDownStyle = ComboBoxStyle.DropDownList;
-            minutesDropDown.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            minutesDropDown.FormattingEnabled = true;
-            minutesDropDown.Location = new Point(193, 85);
-            minutesDropDown.Name = "minutesDropDown";
-            minutesDropDown.Size = new Size(121, 26);
-            minutesDropDown.TabIndex = 4;
+            minutesDropDownList.DropDownStyle = ComboBoxStyle.DropDownList;
+            minutesDropDownList.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            minutesDropDownList.FormattingEnabled = true;
+            minutesDropDownList.Location = new Point(193, 85);
+            minutesDropDownList.Name = "minutesDropDownList";
+            minutesDropDownList.Size = new Size(121, 26);
+            minutesDropDownList.TabIndex = 4;
+            minutesDropDownList.SelectedIndexChanged += minutesDropDownList_SelectedIndexChanged;
             // 
-            // secondsDropDown
+            // secondsDropDownList
             // 
-            secondsDropDown.DropDownStyle = ComboBoxStyle.DropDownList;
-            secondsDropDown.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            secondsDropDown.FormattingEnabled = true;
-            secondsDropDown.Location = new Point(377, 85);
-            secondsDropDown.Name = "secondsDropDown";
-            secondsDropDown.Size = new Size(121, 26);
-            secondsDropDown.TabIndex = 5;
-            // 
-            // setBtn
-            // 
-            setBtn.BackColor = Color.LightCyan;
-            setBtn.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            setBtn.Location = new Point(12, 151);
-            setBtn.Name = "setBtn";
-            setBtn.Size = new Size(486, 45);
-            setBtn.TabIndex = 6;
-            setBtn.Text = "Set Timer";
-            setBtn.UseVisualStyleBackColor = false;
-            setBtn.Click += this.setBtn_Click;
+            secondsDropDownList.DropDownStyle = ComboBoxStyle.DropDownList;
+            secondsDropDownList.Font = new Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            secondsDropDownList.FormattingEnabled = true;
+            secondsDropDownList.Location = new Point(382, 85);
+            secondsDropDownList.Name = "secondsDropDownList";
+            secondsDropDownList.Size = new Size(121, 26);
+            secondsDropDownList.TabIndex = 5;
+            secondsDropDownList.SelectedIndexChanged += secondsDropDownList_SelectedIndexChanged;
             // 
             // countdownDisplay
             // 
             countdownDisplay.AutoSize = true;
-            countdownDisplay.Font = new Font("Verdana", 48F, FontStyle.Bold, GraphicsUnit.Point);
-            countdownDisplay.Location = new Point(39, 230);
+            countdownDisplay.Font = new Font("Verdana", 50F, FontStyle.Bold, GraphicsUnit.Point);
+            countdownDisplay.Location = new Point(55, 149);
             countdownDisplay.Name = "countdownDisplay";
-            countdownDisplay.Size = new Size(407, 78);
+            countdownDisplay.Size = new Size(376, 80);
             countdownDisplay.TabIndex = 7;
-            countdownDisplay.Text = "100:59:59";
+            countdownDisplay.Text = "00:00:00";
             // 
             // startBtn
             // 
             startBtn.BackColor = Color.LightGreen;
             startBtn.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            startBtn.Location = new Point(39, 345);
+            startBtn.Location = new Point(12, 286);
             startBtn.Name = "startBtn";
             startBtn.Size = new Size(195, 45);
             startBtn.TabIndex = 8;
             startBtn.Text = "Start";
             startBtn.UseVisualStyleBackColor = false;
+            startBtn.Click += startBtn_Click;
             // 
             // stopBtn
             // 
             stopBtn.BackColor = Color.LightCoral;
             stopBtn.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            stopBtn.Location = new Point(251, 345);
+            stopBtn.Location = new Point(303, 286);
             stopBtn.Name = "stopBtn";
             stopBtn.Size = new Size(195, 45);
             stopBtn.TabIndex = 9;
             stopBtn.Text = "Stop";
             stopBtn.UseVisualStyleBackColor = false;
+            stopBtn.Click += stopBtn_Click;
             // 
             // resetBtn
             // 
             resetBtn.BackColor = Color.Gold;
             resetBtn.Font = new Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            resetBtn.Location = new Point(12, 458);
+            resetBtn.Location = new Point(12, 370);
             resetBtn.Name = "resetBtn";
             resetBtn.Size = new Size(486, 45);
             resetBtn.TabIndex = 10;
             resetBtn.Text = "Reset";
             resetBtn.UseVisualStyleBackColor = false;
+            resetBtn.Click += resetBtn_Click;
             // 
             // TimerForm
             // 
+            AcceptButton = startBtn;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(511, 551);
+            ClientSize = new Size(515, 436);
             Controls.Add(resetBtn);
             Controls.Add(stopBtn);
             Controls.Add(startBtn);
             Controls.Add(countdownDisplay);
-            Controls.Add(setBtn);
-            Controls.Add(secondsDropDown);
-            Controls.Add(minutesDropDown);
-            Controls.Add(hourDropdownList);
+            Controls.Add(secondsDropDownList);
+            Controls.Add(minutesDropDownList);
+            Controls.Add(hoursDropdownList);
             Controls.Add(secondsLabel);
             Controls.Add(minutesLabel);
-            Controls.Add(hourLabel);
+            Controls.Add(hoursLabel);
             Name = "TimerForm";
             Text = "Countdown Timer";
             ResumeLayout(false);
@@ -183,13 +181,12 @@
         #endregion
 
         private System.Windows.Forms.Timer countdownTimer;
-        private Label hourLabel;
+        private Label hoursLabel;
         private Label minutesLabel;
         private Label secondsLabel;
-        private ComboBox hourDropdownList;
-        private ComboBox minutesDropDown;
-        private ComboBox secondsDropDown;
-        private Button setBtn;
+        private ComboBox hoursDropdownList;
+        private ComboBox minutesDropDownList;
+        private ComboBox secondsDropDownList;
         private Label countdownDisplay;
         private Button startBtn;
         private Button stopBtn;
